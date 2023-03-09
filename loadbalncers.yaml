@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deployment
+spec:
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - name: hello
+        image: gcr.io/google-samples/hello-app:2.0
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: hello
+  ports:
+  - port: 8000 #My wish
+    targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zone-printer-deployment
+spec:
+  selector:
+    matchLabels:
+      app: zone-printer
+  template:
+    metadata:
+      labels:
+        app: zone-printer
+    spec:
+      containers:
+      - name: zone-printer
+        image: gcr.io/google-samples/zone-printer:0.2
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zone-printer-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: zone-printer
+  ports:
+  - port: 9000 #My wish
+    targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whereami-deployment
+spec:
+  selector:
+    matchLabels:
+      app: whereami
+  template:
+    metadata:
+      labels:
+        app: whereami
+    spec:
+      containers:
+      - name: whereami
+        image: gcr.io/google-samples/whereami:v1.2.6
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whereami-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: whereami
+  ports:
+  - port: 10000
+    targetPort: 8080
+
