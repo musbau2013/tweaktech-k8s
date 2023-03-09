@@ -54,8 +54,8 @@ variable "docker-image_whereami" {
 variable "labels" {
   type = map(any)
   default = {
-    "owner"       = "precocityllc.com"
+    "owner"       = "tweakideaz.com"
     "environment" = "dev"
-    "project"     = "apthub-dev-us-south1-app"
+    "project"     = "tweak-dev-us-west1-app"
   }
 }
